@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treevs.Essentials.AutoFixture.Xunit", "Treevs.Essentials.AutoFixture.Xunit/Treevs.Essentials.AutoFixture.Xunit.csproj", "{3A818BD6-3E67-46A9-AA7A-E8647CD96335}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Treevs.Essentials.AutoFixture.Xunit", "Treevs.Essentials.AutoFixture.Xunit\Treevs.Essentials.AutoFixture.Xunit.csproj", "{3A818BD6-3E67-46A9-AA7A-E8647CD96335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
