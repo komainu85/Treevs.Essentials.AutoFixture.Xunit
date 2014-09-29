@@ -20,7 +20,6 @@
             this(
                new List<ISetupActionsProvider>
                    {
-                       new StaticFieldSetupActionsProvider(), 
                        new StaticMethodSetupActionsProvider(), 
                        new StaticPropertySetupActionsProvider()
                    },
