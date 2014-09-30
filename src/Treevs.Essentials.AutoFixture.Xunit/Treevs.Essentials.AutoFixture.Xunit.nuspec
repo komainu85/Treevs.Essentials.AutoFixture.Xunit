@@ -14,8 +14,8 @@
     <copyright>Copyright 2014</copyright>
     <tags>AutoFixture Xunit</tags>
     <dependencies>
-      	  <dependency id="Ploeh.AutoFixture" version="3.0" />
-	  <dependency id="Ploeh.AutoFixture.Xunit" version="3.0" />
+      	  <dependency id="AutoFixture" version="3.0" />
+	  <dependency id="AutoFixture.Xunit" version="3.0" />
 	  <dependency id="xunit" version="1.9" />
 	  <dependency id="xunit.extensions" version="1.9" />
     </dependencies>
