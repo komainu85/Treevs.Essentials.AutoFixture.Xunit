@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("treeves.essentials.AutoFixture.Xunit")]
+[assembly: AssemblyTitle("Treevs.Essentials.AutoFixture.Xunit")]
 [assembly: AssemblyDescription("Additions to AutoFixture.Xunit that I wouldn't leave the house without.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("treeves.essentials.AutoFixture.Xunit")]
+[assembly: AssemblyProduct("Treevs.Essentials.AutoFixture.Xunit")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
