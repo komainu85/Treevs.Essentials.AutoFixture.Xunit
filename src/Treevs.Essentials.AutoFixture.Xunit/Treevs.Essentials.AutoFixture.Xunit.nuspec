@@ -4,17 +4,17 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>Trevor Reeves</authors>
+    <owners>Trevor Reeves</owners>
     <licenseUrl>https://github.com/trevorreeves/Treevs.Essentials.AutoFixture.Xunit/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/trevorreeves/Treevs.Essentials.AutoFixture.Xunit</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First release
+    <releaseNotes>First release</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>AutoFixture Xunit</tags>
-	<dependencies>
-      <dependency id="Ploeh.AutoFixture" version="3.0" />
+    <dependencies>
+      	  <dependency id="Ploeh.AutoFixture" version="3.0" />
 	  <dependency id="Ploeh.AutoFixture.Xunit" version="3.0" />
 	  <dependency id="xunit" version="1.9" />
 	  <dependency id="xunit.extensions" version="1.9" />
