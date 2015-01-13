@@ -30,24 +30,49 @@
             return enumerable;
         }
 
-        public static Type GetActionSourceType(Type type, string fieldName)
+        public static Type GetActionSourceTypeField(Type type, string fieldName)
         {
-            var field = type.GetField(
+            var member = type.GetField(
                 fieldName,
                 BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
-            if (field == null)
+            if (member == null)
             {
                 return null;
             }
 
-            var sourceType = field.GetValue(null) as Type;
+            var sourceType = member.GetValue(null) as Type;
 
             if (sourceType == null)
             {
                 throw new ArgumentOutOfRangeException(
                     string.Format(
                         "Field {0} on {1} did not return a Type value",
+                        fieldName,
+                        type.FullName));
+            }
+
+            return sourceType;
+        }
+
+        public static Type GetActionSourceTypeProperty(Type type, string fieldName)
+        {
+            var member = type.GetProperty(
+                fieldName,
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+
+            if (member == null)
+            {
+                return null;
+            }
+
+            var sourceType = member.GetValue(null) as Type;
+
+            if (sourceType == null)
+            {
+                throw new ArgumentOutOfRangeException(
+                    string.Format(
+                        "Property {0} on {1} did not return a Type value",
                         fieldName,
                         type.FullName));
             }

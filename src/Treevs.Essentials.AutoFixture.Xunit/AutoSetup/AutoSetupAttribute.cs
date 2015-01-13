@@ -63,7 +63,8 @@
         {
             var finalClassSourceType = 
                 _classSource ??
-                SetupActionsUtils.GetActionSourceType(methodUnderTest.ReflectedType, AutoSetupExternalSourceFieldName) ?? 
+                SetupActionsUtils.GetActionSourceTypeField(methodUnderTest.ReflectedType, AutoSetupExternalSourceFieldName) ??
+                SetupActionsUtils.GetActionSourceTypeProperty(methodUnderTest.ReflectedType, AutoSetupExternalSourceFieldName) ?? 
                 methodUnderTest.ReflectedType;
 
             foreach (var action in this.GetSetups(finalClassSourceType))
