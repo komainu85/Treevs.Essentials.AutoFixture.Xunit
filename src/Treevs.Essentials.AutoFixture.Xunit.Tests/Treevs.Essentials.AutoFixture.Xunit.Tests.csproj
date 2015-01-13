@@ -54,8 +54,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoSetupAttributeFixture.cs" />
+    <Compile Include="AutoSetupAttributeSetupsInBaseFixture.cs" />
+    <Compile Include="AutoSetupAttributeSetupsInLeafFixture.cs" />
+    <Compile Include="AutoSetupAttributeSetupsInExternalClassFixture.cs" />
+    <Compile Include="AutoSetupAttributeSingleClassFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClasses.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

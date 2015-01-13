@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 {
@@ -13,18 +9,18 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 
     using Treevs.Essentials.AutoFixture.Xunit.AutoSetup;
 
-    public class AutoSetupAttributeFixture
+    public abstract class AbstractBaseWithSetupsFixture
     {
         public static Action<IFixture> AutoSetup()
         {
             return (f) =>
-                {
-                    f.Customize<AutoSetupGlobalSut>(obj => obj.OmitAutoProperties());
-                    f.Customize<AutoSetupMethodSut>(obj => obj.OmitAutoProperties());
-                    f.Customize<AutoSetupPropertySut>(obj => obj.OmitAutoProperties());
+            {
+                f.Customize<AutoSetupGlobalSut>(obj => obj.OmitAutoProperties());
+                f.Customize<AutoSetupMethodSut>(obj => obj.OmitAutoProperties());
+                f.Customize<AutoSetupPropertySut>(obj => obj.OmitAutoProperties());
 
-                    f.Customize<AutoSetupGlobalSut>(obj => obj.Do(sut => sut.Setup = true));
-                };
+                f.Customize<AutoSetupGlobalSut>(obj => obj.Do(sut => sut.Setup = true));
+            };
         }
 
         public static Action<IFixture> MethodSetup()
@@ -43,12 +39,15 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
                     .OmitAutoProperties());
             }
         }
+    }
 
+    public class AutoSetupAttributeSetupsInBaseFixture : AbstractBaseWithSetupsFixture
+    {
         [Theory]
         [AutoSetup]
         public void ImplicitGlobalSetup(
-            AutoSetupGlobalSut globalSut, 
-            AutoSetupMethodSut methodSut, 
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
             AutoSetupPropertySut propertySut)
         {
             Assert.True(globalSut.Setup);
@@ -125,25 +124,4 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
             Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
         }
     }
-
-    #region Test Classes
-
-    public abstract class BaseSut
-    {
-        protected BaseSut()
-        {
-            Setup = false;
-        }
-
-        public bool Setup { get; set; }
-    }
-
-    public class AutoSetupGlobalSut : BaseSut { }
-
-    public class AutoSetupMethodSut : BaseSut { }
-
-    public class AutoSetupPropertySut : BaseSut { }
-
-    #endregion
-
 }
