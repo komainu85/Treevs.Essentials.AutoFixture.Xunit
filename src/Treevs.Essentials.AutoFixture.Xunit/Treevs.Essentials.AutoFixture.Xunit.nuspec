@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.1</version>
     <title>$title$</title>
     <authors>Trevor Reeves</authors>
     <owners>Trevor Reeves</owners>
@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/trevorreeves/Treevs.Essentials.AutoFixture.Xunit</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First release</releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <releaseNotes>Now supporting test fixtures with inheritance hierarchies, and specifying setup functions in classes outside of the fixture class.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
     <tags>AutoFixture Xunit</tags>
     <dependencies>
       	  <dependency id="AutoFixture" version="3.0" />
