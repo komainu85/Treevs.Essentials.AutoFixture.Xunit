@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 {
@@ -13,7 +9,7 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 
     using Treevs.Essentials.AutoFixture.Xunit.AutoSetup;
 
-    public class AutoSetupAttributeFixture
+    public class AutoSetupAttributeSingleClassFixture
     {
         public static Action<IFixture> AutoSetup()
         {
@@ -125,25 +121,4 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
             Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
         }
     }
-
-    #region Test Classes
-
-    public abstract class BaseSut
-    {
-        protected BaseSut()
-        {
-            Setup = false;
-        }
-
-        public bool Setup { get; set; }
-    }
-
-    public class AutoSetupGlobalSut : BaseSut { }
-
-    public class AutoSetupMethodSut : BaseSut { }
-
-    public class AutoSetupPropertySut : BaseSut { }
-
-    #endregion
-
 }
