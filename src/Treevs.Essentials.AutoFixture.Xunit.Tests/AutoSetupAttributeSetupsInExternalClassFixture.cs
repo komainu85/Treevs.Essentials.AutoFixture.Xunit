@@ -11,14 +11,26 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 
     public class MyAutoSetups
     {
-        public Action<IFixture> MethodSetup()
+        public static Action<IFixture> AutoSetup()
+        {
+            return (f) =>
+            {
+                f.Customize<AutoSetupGlobalSut>(obj => obj.OmitAutoProperties());
+                f.Customize<AutoSetupMethodSut>(obj => obj.OmitAutoProperties());
+                f.Customize<AutoSetupPropertySut>(obj => obj.OmitAutoProperties());
+
+                f.Customize<AutoSetupGlobalSut>(obj => obj.Do(sut => sut.Setup = true));
+            };
+        }
+
+        public static Action<IFixture> MethodSetup()
         {
             return (f) => f.Customize<AutoSetupMethodSut>(obj => obj
                 .Do(sut => sut.Setup = true)
                 .OmitAutoProperties());
         }
 
-        public Action<IFixture> PropertySetup
+        public static Action<IFixture> PropertySetup
         {
             get
             {
