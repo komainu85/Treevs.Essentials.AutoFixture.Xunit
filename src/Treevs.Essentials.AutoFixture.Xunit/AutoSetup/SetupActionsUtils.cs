@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using Ploeh.AutoFixture;
 
@@ -28,5 +29,30 @@
 
             return enumerable;
         }
+
+        public static Type GetActionSourceType(Type type, string fieldName)
+        {
+            var field = type.GetField(
+                fieldName,
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+
+            if (field == null)
+            {
+                return null;
+            }
+
+            var sourceType = field.GetValue(null) as Type;
+
+            if (sourceType == null)
+            {
+                throw new ArgumentOutOfRangeException(
+                    string.Format(
+                        "Field {0} on {1} did not return a Type value",
+                        fieldName,
+                        type.FullName));
+            }
+
+            return sourceType;
+        } 
     }
 }

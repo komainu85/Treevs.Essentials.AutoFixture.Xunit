@@ -12,6 +12,8 @@
     {
         private const string DefaultFixtureSetupName = "AutoSetup";
 
+        private const string AutoSetupExternalSourceFieldName = "AutoSetupSource";
+
         private readonly string[] _fixtureSetups;
 
         private readonly Type _classSource;
@@ -59,7 +61,12 @@
 
         public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
         {
-            foreach (var action in this.GetSetups(_classSource??methodUnderTest.ReflectedType))
+            var finalClassSourceType = 
+                _classSource ??
+                SetupActionsUtils.GetActionSourceType(methodUnderTest.ReflectedType, AutoSetupExternalSourceFieldName) ?? 
+                methodUnderTest.ReflectedType;
+
+            foreach (var action in this.GetSetups(finalClassSourceType))
             {
                 action(Fixture);
             }

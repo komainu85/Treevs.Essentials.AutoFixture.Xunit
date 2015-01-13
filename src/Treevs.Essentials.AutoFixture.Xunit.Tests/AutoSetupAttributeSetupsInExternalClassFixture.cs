@@ -127,6 +127,8 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
 
     public class AutoSetupAttributeSetupsInExternalClassViaSourcePropertyFixture
     {
+        // specifies this type will be used as the source of all setup methods, unless explicitly
+        // overriden for a test method.
         public static Type AutoSetupSource = typeof(MyAutoSetups);
 
         [Theory]
