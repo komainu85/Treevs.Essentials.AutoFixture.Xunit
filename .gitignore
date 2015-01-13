@@ -181,3 +181,10 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+#NCrunch
+*.ncrunchsolution
+*.ncrunchproject
+_NCrunch_*
+
+

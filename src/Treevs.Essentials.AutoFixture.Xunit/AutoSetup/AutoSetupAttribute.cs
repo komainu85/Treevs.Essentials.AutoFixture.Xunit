@@ -60,7 +60,7 @@
         public IEnumerable<Action<IFixture>> GetSetups(MethodInfo method)
         {
             var setupActions = new List<Action<IFixture>>();
-            var type = method.DeclaringType;
+            var type = method.ReflectedType;
 
             foreach (var fixtureSetup in this.FixtureSetups.Where(a => !string.IsNullOrWhiteSpace(a)))
             {
