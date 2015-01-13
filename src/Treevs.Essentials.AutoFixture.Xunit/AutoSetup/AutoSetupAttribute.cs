@@ -12,9 +12,9 @@
     {
         private const string DefaultFixtureSetupName = "AutoSetup";
 
-        private readonly string[] fixtureSetups;
+        private readonly string[] _fixtureSetups;
 
-        private readonly Type classSource;
+        private readonly Type _classSource;
 
         private readonly IEnumerable<ISetupActionsProvider> _setupActionsProviders;
 
@@ -51,17 +51,17 @@
                 fixtureSetups = new[] { DefaultFixtureSetupName }.Concat(fixtureSetups).ToArray();
             }
 
-            this.fixtureSetups = fixtureSetups;
-            this.Fixture.Register(() => this.Fixture);
-            this._setupActionsProviders = setupActionsProviders;
-            this.classSource = externalClassSource;
+            _fixtureSetups = fixtureSetups;
+            Fixture.Register(() => Fixture); // allows tests to request the fixture instance
+            _setupActionsProviders = setupActionsProviders;
+            _classSource = externalClassSource;
         }
 
         public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
         {
-            foreach (var action in this.GetSetups(classSource??methodUnderTest.ReflectedType))
+            foreach (var action in this.GetSetups(_classSource??methodUnderTest.ReflectedType))
             {
-                action(this.Fixture);
+                action(Fixture);
             }
 
             return base.GetData(methodUnderTest, parameterTypes);
@@ -71,9 +71,9 @@
         {
             var setupActions = new List<Action<IFixture>>();
 
-            foreach (var fixtureSetup in this.fixtureSetups.Where(a => !string.IsNullOrWhiteSpace(a)))
+            foreach (var fixtureSetup in _fixtureSetups.Where(a => !string.IsNullOrWhiteSpace(a)))
             {
-                var setups = this._setupActionsProviders
+                var setups = _setupActionsProviders
                     .SelectMany(p => p.GetSetupActions(functionSourceType, fixtureSetup))
                     .ToList();
 
