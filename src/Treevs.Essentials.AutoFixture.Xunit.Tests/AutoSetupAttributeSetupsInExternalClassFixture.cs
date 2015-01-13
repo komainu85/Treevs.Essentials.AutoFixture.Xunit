@@ -124,4 +124,90 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
             Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
         }
     }
+
+    public class AutoSetupAttributeSetupsInExternalClassViaSourcePropertyFixture
+    {
+        public static Type AutoSetupSource = typeof(MyAutoSetups);
+
+        [Theory]
+        [AutoSetup]
+        public void ImplicitGlobalSetup(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.False(methodSut.Setup);
+            Assert.False(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("AutoSetup")]
+        public void ExplicitGlobalSetup(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.False(methodSut.Setup);
+            Assert.False(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("AutoSetup", "MethodSetup")]
+        public void ExplicitGlobalSetupWithMethodSetup(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.True(methodSut.Setup);
+            Assert.False(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("MethodSetup")]
+        public void GlobalSetupWithMethodSetup(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.True(methodSut.Setup);
+            Assert.False(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("PropertySetup")]
+        public void GlobalSetupWithPropertySetup(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.False(methodSut.Setup);
+            Assert.True(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("MethodSetup", "PropertySetup")]
+        public void GlobalSetupWithMultipleSetups(
+            AutoSetupGlobalSut globalSut,
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut)
+        {
+            Assert.True(globalSut.Setup);
+            Assert.True(methodSut.Setup);
+            Assert.True(propertySut.Setup);
+        }
+
+        [Theory]
+        [AutoSetup("MethodSetup", "PropertySetup")]
+        public void FixtureInstanceInjected(IFixture fixture)
+        {
+            Assert.True(fixture.Create<AutoSetupGlobalSut>().Setup);
+            Assert.True(fixture.Create<AutoSetupMethodSut>().Setup);
+            Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
+        }
+    }
 }
