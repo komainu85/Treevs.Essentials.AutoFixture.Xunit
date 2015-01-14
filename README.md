@@ -1,6 +1,6 @@
 Treevs.Essentials.AutoFixture.Xunit
 =============================
-Little additions to AutoFixture.Xunit that I wouldn't ever leave the house without.
+Little additions to AutoFixture.Xunit that I wouldn't ever leave the house without. Available on nuget.
 
 ##AutoSetup attribute
 This attribute allows for a clean way to specify fixture customisations used across tests in a fixture, and still allow the use of the Xunit Theory attribute to inject the Subject Under Test instance into the test method.  So the 'arrange' phase of all tests in a fixture can be defined separately, in methods with meaningful names, and be available for use by all test methods in the same class, while leaving the test methods cleaner to read.
