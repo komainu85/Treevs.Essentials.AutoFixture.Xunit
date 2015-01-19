@@ -10,12 +10,12 @@
     <projectUrl>https://github.com/trevorreeves/Treevs.Essentials.AutoFixture.Xunit</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Now supporting test fixtures with inheritance hierarchies, and specifying setup functions in classes outside of the fixture class.</releaseNotes>
+    <releaseNotes>Now supporting test fixtures with inheritance hierarchies, and specifying setup functions in classes outside of the fixture class.  Code documentation added. Dependency versioning revised, and sensible versioning system put in place.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>AutoFixture Xunit</tags>
     <dependencies>
-      	  <dependency id="AutoFixture" version="3.0" />
-	  <dependency id="AutoFixture.Xunit" version="3.0" />
+      	  <dependency id="AutoFixture" version="3.2" />
+	  <dependency id="AutoFixture.Xunit" version="3.2" />
 	  <dependency id="xunit" version="1.9" />
 	  <dependency id="xunit.extensions" version="1.9" />
     </dependencies>
