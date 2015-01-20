@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.1</version>
+    <version>1.1.1</version>
     <title>$title$</title>
     <authors>Trevor Reeves</authors>
     <owners>Trevor Reeves</owners>
@@ -14,10 +14,10 @@
     <copyright>Copyright 2015</copyright>
     <tags>AutoFixture Xunit</tags>
     <dependencies>
-      	  <dependency id="AutoFixture" version="3.2" />
-	  <dependency id="AutoFixture.Xunit" version="3.2" />
-	  <dependency id="xunit" version="1.9" />
-	  <dependency id="xunit.extensions" version="1.9" />
+       <dependency id="AutoFixture" version="3.22" />
+	   <dependency id="AutoFixture.Xunit" version="3.22" />
+	   <dependency id="xunit" version="1.9" />
+	   <dependency id="xunit.extensions" version="1.9" />
     </dependencies>
   </metadata>
 </package>
