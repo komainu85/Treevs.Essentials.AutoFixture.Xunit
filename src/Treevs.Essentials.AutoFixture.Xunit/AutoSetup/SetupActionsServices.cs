@@ -7,7 +7,7 @@
 
     using Ploeh.AutoFixture;
 
-    public class SetupActionsUtils
+    public static class SetupActionsServices
     {
         public static IEnumerable<Action<IFixture>> ParseFixtureActionValue(object obj)
         {

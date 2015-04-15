@@ -24,7 +24,7 @@
 
             try
             {
-                return SetupActionsUtils.ParseFixtureActionValue(obj);
+                return SetupActionsServices.ParseFixtureActionValue(obj);
             }
             catch (ArgumentNullException)
             {

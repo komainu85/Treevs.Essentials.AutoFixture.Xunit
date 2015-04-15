@@ -23,7 +23,7 @@
             var obj = property.GetValue(null);
             try
             {
-                return SetupActionsUtils.ParseFixtureActionValue(obj);
+                return SetupActionsServices.ParseFixtureActionValue(obj);
             }
             catch (ArgumentNullException)
             {

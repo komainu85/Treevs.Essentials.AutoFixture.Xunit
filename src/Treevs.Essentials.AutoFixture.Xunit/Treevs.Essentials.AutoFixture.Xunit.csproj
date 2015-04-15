@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="AutoSetup\AutoSetupAttribute.cs" />
     <Compile Include="AutoSetup\ActionProviders\ISetupActionsProvider.cs" />
-    <Compile Include="AutoSetup\SetupActionsUtils.cs" />
+    <Compile Include="AutoSetup\SetupActionsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AutoSetup\ActionProviders\StaticMethodSetupActionsProvider.cs" />
     <Compile Include="AutoSetup\ActionProviders\StaticPropertySetupActionsProvider.cs" />
