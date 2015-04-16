@@ -1,4 +1,4 @@
-﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup
+﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup.ActionProviders
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,7 @@
             var obj = property.GetValue(null);
             try
             {
-                return SetupActionsUtils.ParseFixtureActionValue(obj);
+                return SetupActionsServices.ParseFixtureActionValue(obj);
             }
             catch (ArgumentNullException)
             {
