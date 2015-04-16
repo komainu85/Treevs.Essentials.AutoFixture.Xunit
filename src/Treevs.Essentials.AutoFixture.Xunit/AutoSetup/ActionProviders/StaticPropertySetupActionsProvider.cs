@@ -1,4 +1,4 @@
-﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup
+﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup.ActionProviders
 {
     using System;
     using System.Collections.Generic;

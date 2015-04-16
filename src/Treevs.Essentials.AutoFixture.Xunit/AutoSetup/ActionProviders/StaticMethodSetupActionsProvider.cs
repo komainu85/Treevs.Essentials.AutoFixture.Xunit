@@ -1,4 +1,4 @@
-﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup
+﻿namespace Treevs.Essentials.AutoFixture.Xunit.AutoSetup.ActionProviders
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,9 @@
                fixtureAction,
                BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
-            if (method == null)
+            if (method == null || 
+                (method.ReturnType != typeof(Action<IFixture>) && 
+                method.ReturnType != typeof(IEnumerable<Action<IFixture>>)))
             {
                 return Enumerable.Empty<Action<IFixture>>();
             }

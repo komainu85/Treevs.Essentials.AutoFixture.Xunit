@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoSetup\ActionProviders\PlainMethodSetupActionsProvider.cs" />
     <Compile Include="AutoSetup\AutoSetupAttribute.cs" />
     <Compile Include="AutoSetup\ActionProviders\ISetupActionsProvider.cs" />
     <Compile Include="AutoSetup\SetupActionsServices.cs" />
