@@ -29,6 +29,10 @@ public class MyFixture {
 		}
 	}
 
+    public static void VoidMethodSetup3(IService1 s1, IService2 s2, IFixture fixture) {
+	    // perform any setups on s1, s2 or any customisations on the fixture itself
+	}
+
 	[Theory]
 	[AutoSetup] // The AutoSetup() customisation method is used implicitly
 	public void MyTestA(SUT mySut) {
@@ -47,9 +51,15 @@ public class MyFixture {
 		// test mySut
 	}
 
+    [Theory]
+	[AutoSetup("VoidMethodSetup3")] // AutoSetup(), VoidMethodSetup3() are used
+	public void MyTestD(SUT mySut) {
+		// test mySut
+	}
+
 	[Theory]
 	[AutoSetup("MethodSetup1", "PropertySetup2")] // AutoSetup(), MethodSetup1() and PropertySetup2 are used
-	public void MyTestD(IFixture fixture) {
+	public void MyTestE(IFixture fixture) {
 		// Do some bespoke customisation of fixture
 		var mySut = fixture.Create<SUT>();
 		
@@ -59,7 +69,71 @@ public class MyFixture {
 ```
 
 ###Deriving Fixture Classes
-Additionally, the setup functions can be specified in a base fixture class and the test methods be defined in a deriving class.  Or vice versa; the test methods defined in a base class, and deriving classes can implement (and potentially override) setup actions.
+Additionally, the setup functions can be specified in a base fixture class and the test methods be defined in a deriving class:
+
+```c#
+public abstract class MyBaseTests
+{
+	public static Action<IFixture> AutoSetup() {
+		return (f) => f.Customize<SUT>....
+	}
+	
+	public static Action<IFixture> MethodSetup1() {
+		return (f) => f.Customize<SUT>....
+	}
+
+	public static Action<IFixture> PropertySetup2 {
+		get {
+			return (f) => f.Customize<SUT>...
+		}
+	}
+
+    public static void VoidMethodSetup3(IService1 s1, IService2 s2, IFixture fixture)
+    { ... }
+}
+
+public class MyDerivedTests : MyBaseTests
+{
+	[Theory]
+	[AutoSetup("MethodSetup1")]
+	public void MyTestB(SUT mySut) {
+		// test mySut
+	}
+}
+```
+
+Or vice versa; the test methods defined in a base class, and deriving classes can implement (and potentially override) setup actions:
+
+```c#
+public abstract class MyBaseTests
+{
+	[Theory]
+	[AutoSetup("MethodSetup1")]
+	public void MyTestB(SUT mySut) {
+		// test mySut
+	}
+}
+
+public class MyDerivedTests : MyBaseTests
+{
+	public static Action<IFixture> AutoSetup() {
+		return (f) => f.Customize<SUT>....
+	}
+	
+	public static Action<IFixture> MethodSetup1() {
+		return (f) => f.Customize<SUT>....
+	}
+
+	public static Action<IFixture> PropertySetup2 {
+		get {
+			return (f) => f.Customize<SUT>...
+		}
+	}
+
+    public static void VoidMethodSetup3(IService1 s1, IService2 s2, IFixture fixture)
+    { ... }	
+}
+```
 
 ###Sharing Setup Methods in External Classes
 Setup functions can also be specified in a class outside of the test fixture hierarchy.  There are a couple of ways these functions can then be referenced:
