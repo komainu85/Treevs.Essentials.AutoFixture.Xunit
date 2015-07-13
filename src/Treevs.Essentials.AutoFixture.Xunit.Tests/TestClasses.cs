@@ -15,4 +15,6 @@
     public class AutoSetupMethodSut : BaseSut { }
 
     public class AutoSetupPropertySut : BaseSut { }
+
+    public class AutoSetupPlainMethodSut : BaseSut { }
 }

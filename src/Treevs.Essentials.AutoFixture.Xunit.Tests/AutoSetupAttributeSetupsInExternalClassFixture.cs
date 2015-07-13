@@ -15,11 +15,11 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         {
             return (f) =>
             {
-                f.Customize<AutoSetupGlobalSut>(obj => obj.OmitAutoProperties());
+                f.Customize<AutoSetupGlobalSut>(obj => obj.OmitAutoProperties().Do(sut => sut.Setup = true));
+
                 f.Customize<AutoSetupMethodSut>(obj => obj.OmitAutoProperties());
                 f.Customize<AutoSetupPropertySut>(obj => obj.OmitAutoProperties());
-
-                f.Customize<AutoSetupGlobalSut>(obj => obj.Do(sut => sut.Setup = true));
+                f.Customize<AutoSetupPlainMethodSut>(obj => obj.OmitAutoProperties());
             };
         }
 
@@ -39,6 +39,12 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
                     .OmitAutoProperties());
             }
         }
+
+        public static void PlainMethodSetup(IFixture fixture, AutoSetupGlobalSut globalSut, AutoSetupPlainMethodSut plainMethodSut)
+        {
+            Assert.True(globalSut.Setup);
+            fixture.Customize<AutoSetupPlainMethodSut>(opt => opt.Do(sut => sut.Setup = true));
+        }
     }
 
     public class AutoSetupAttributeSetupsInExternalClassFixture
@@ -47,12 +53,14 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         [AutoSetup(typeof(MyAutoSetups))]
         public void ImplicitGlobalSetup(
             AutoSetupGlobalSut globalSut, 
-            AutoSetupMethodSut methodSut, 
-            AutoSetupPropertySut propertySut)
+            AutoSetupMethodSut methodSut,
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -60,11 +68,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void ExplicitGlobalSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -72,11 +82,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void ExplicitGlobalSetupWithMethodSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -84,11 +96,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void GlobalSetupWithMethodSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -96,32 +110,37 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void GlobalSetupWithPropertySetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.True(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
-        [AutoSetup(typeof(MyAutoSetups), "MethodSetup", "PropertySetup")]
+        [AutoSetup(typeof(MyAutoSetups), "MethodSetup", "PropertySetup", "PlainMethodSetup")]
         public void GlobalSetupWithMultipleSetups(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.True(propertySut.Setup);
+            Assert.True(plainMethodSut.Setup);
         }
 
         [Theory]
-        [AutoSetup(typeof(MyAutoSetups), "MethodSetup", "PropertySetup")]
+        [AutoSetup(typeof(MyAutoSetups), "MethodSetup", "PropertySetup", "PlainMethodSetup")]
         public void FixtureInstanceInjected(IFixture fixture)
         {
             Assert.True(fixture.Create<AutoSetupGlobalSut>().Setup);
             Assert.True(fixture.Create<AutoSetupMethodSut>().Setup);
             Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
+            Assert.True(fixture.Create<AutoSetupPlainMethodSut>().Setup);
         }
     }
 
@@ -136,11 +155,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void ImplicitGlobalSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -148,11 +169,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void ExplicitGlobalSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -160,11 +183,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void ExplicitGlobalSetupWithMethodSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -172,11 +197,13 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void GlobalSetupWithMethodSetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.False(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
@@ -184,32 +211,37 @@ namespace Treevs.Essentials.AutoFixture.Xunit.Tests
         public void GlobalSetupWithPropertySetup(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.False(methodSut.Setup);
             Assert.True(propertySut.Setup);
+            Assert.False(plainMethodSut.Setup);
         }
 
         [Theory]
-        [AutoSetup("MethodSetup", "PropertySetup")]
+        [AutoSetup("MethodSetup", "PropertySetup", "PlainMethodSetup")]
         public void GlobalSetupWithMultipleSetups(
             AutoSetupGlobalSut globalSut,
             AutoSetupMethodSut methodSut,
-            AutoSetupPropertySut propertySut)
+            AutoSetupPropertySut propertySut,
+            AutoSetupPlainMethodSut plainMethodSut)
         {
             Assert.True(globalSut.Setup);
             Assert.True(methodSut.Setup);
             Assert.True(propertySut.Setup);
+            Assert.True(plainMethodSut.Setup);
         }
 
         [Theory]
-        [AutoSetup("MethodSetup", "PropertySetup")]
+        [AutoSetup("MethodSetup", "PropertySetup", "PlainMethodSetup")]
         public void FixtureInstanceInjected(IFixture fixture)
         {
             Assert.True(fixture.Create<AutoSetupGlobalSut>().Setup);
             Assert.True(fixture.Create<AutoSetupMethodSut>().Setup);
             Assert.True(fixture.Create<AutoSetupPropertySut>().Setup);
+            Assert.True(fixture.Create<AutoSetupPlainMethodSut>().Setup);
         }
     }
 }
