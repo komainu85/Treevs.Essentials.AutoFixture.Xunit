@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Treevs.Essentials.AutoFixture.Xunit.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ploeh.AutoFixture">
